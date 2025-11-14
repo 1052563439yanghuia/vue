@@ -14,7 +14,7 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
 })
 </script>
 <template>
-    <div class="biaoti">教学管理系统</div>
+    <div class="title">教学管理系统</div>
     <div v-for="(i, index) in leftNav" :key="index">
         <div @click="i.show = !i.show">{{ i.text }}</div>
         <div v-if="i.show">
@@ -23,7 +23,7 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
     </div>
 </template>
 <style scoped>
-.biaoti {
+.title {
     width: 190px;
     height: 40px;
     margin: 5px;
@@ -37,7 +37,7 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
     line-height: 40px;
 }
 
-.biaoti :hover {
+.title :hover {
     border: 3px dashed #1167d8;
 }
 </style>

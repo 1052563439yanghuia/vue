@@ -1,25 +1,10 @@
 <script setup>
-import { RouterView } from 'vue-router';
-import Aside from './components/aside.vue';
 import Header from './components/header.vue';
-
 
 </script>
 
 <template>
-  <header>
-    <div>
-      <Header/>
-    </div>
-  </header>
-  <aside>
-    
-    <Aside/>
-  </aside>
-  <main>
-    
-    <RouterView></RouterView>
-  </main>
+<Header></Header>
 </template>
 
 <style scoped>
