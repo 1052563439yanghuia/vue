@@ -14,27 +14,37 @@ const leftNav = ref([])
 // })
 </script>
 <template>
-    <div class="title">教学管理系统</div>
-    <div v-for="(i, index) in leftNav" :key="index">
-        <div @click="i.show = !i.show">{{ i.text }}</div>
-        <div v-if="i.show">
-            <div v-for="(j, index) in i.children" :key="index">{{ j.text }}</div>
+    <aside>
+        <div class="title">教学管理系统</div>
+        <div v-for="(i, index) in leftNav" :key="index">
+            <div @click="i.show = !i.show">{{ i.text }}</div>
+            <div v-if="i.show">
+                <div v-for="(j, index) in i.children" :key="index">{{ j.text }}</div>
+            </div>
         </div>
-    </div>
+    </aside>
 </template>
 <style scoped>
+aside{
+    width: 213px;
+    padding: 5px;
+    background-color: #eff7fd;
+    box-sizing: border-box;
+}
 .title {
-    width: 190px;
+    width: 160px;
     height: 40px;
-    margin: 5px;
     padding: 8px;
-    font-size: 16px;
     color: #178fe6;
-    text-align: center;
-    font-weight: bold;
-    background: linear-gradient(to, #d1ebff, #eff7fd);
-    border: 1px solid #95B8E7;
-    line-height: 40px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18.4px;
+    border-radius: 4px;
+    outline: 1px solid #93c5fd;
+    background: linear-gradient(to top, #d1ebff, #eff7fd);
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .title :hover {

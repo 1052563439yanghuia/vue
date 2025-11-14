@@ -6,16 +6,16 @@ import Aside from './components/aside.vue';
 </script>
 
 <template>
-<Header></Header>
-<div>
+  <Header></Header>
+  <main>
     <Aside></Aside>
     <RouterView></RouterView>
-</div>
+  </main>
 </template>
 
 <style scoped>
-aside{
-  width:200px;
-  height: 100%;
+main {
+  display: flex;
+  height: calc(100vh - 60px);
 }
 </style>
