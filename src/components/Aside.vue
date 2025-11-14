@@ -4,14 +4,14 @@ import axios from 'axios';
 
 const leftNav = ref([])
 
-axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
-    /** @type{Array} **/
-    const nav = r.data.data.left_nav_info
+// axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
+//     /** @type{Array} **/
+//     const nav = r.data.data.left_nav_info
 
-    nav.forEach(i => { i.show = false })
+//     nav.forEach(i => { i.show = false })
 
-    leftNav.value = nav
-})
+//     leftNav.value = nav
+// })
 </script>
 <template>
     <div class="title">教学管理系统</div>
