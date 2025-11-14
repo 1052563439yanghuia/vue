@@ -1,8 +1,8 @@
 <script setup>
-import { RouterView } from 'vue-router';
+
 import Aside from './components/aside.vue';
 import Header from './components/header.vue';
-
+import NavigationBar from './components/NavigationBar.vue';
 
 </script>
 
@@ -16,8 +16,9 @@ import Header from './components/header.vue';
     
     <Aside/>
   </aside>
-  <main>
     
+  <main>
+    <div class="daohanglan"><NavigationBar/></div>
     <RouterView></RouterView>
   </main>
 </template>
@@ -30,6 +31,12 @@ header{
 }
 aside{
   width:200px;
-  height: 100%;
+  height:100vh;
+  background-color: #eff7fd;
+}
+.daohanglan{
+    height: 28px;
+    width: 100%;
+    background-color: #dbeafe;
 }
 </style>
