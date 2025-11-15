@@ -4,9 +4,11 @@ import { q } from '../api/api';
 import { useRouter } from 'vue-router';
 import { navBarAdd } from '../stone/navBar';
 import { useUser } from '../stone/user';
+import { useRoute } from 'vue-router';
 
 const leftNav = ref([])
 
+const route = useRoute();
 const router = useRouter();
 
 function toPage(item) {
@@ -32,9 +34,10 @@ q.get("/nav/left_nav").then(r => {
             </div>
             <div v-if="i.show">
                 <div 
-                class="menuItem" 
+                class="menuItem"
+                :class="{ 'red': route.path === '/' + j.name }"
                 v-for="(j, index) in i.children" 
-                :key="index" 
+                :key="index"
                 @click="toPage(j)"
                 >{{ j.text }}</div>
             </div>
@@ -105,5 +108,9 @@ aside {
 .menu .menuItem:hover {
     color: #f87171;
     cursor: pointer;
+}
+
+.red{
+    color: red;
 }
 </style>

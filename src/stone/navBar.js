@@ -5,7 +5,9 @@ export const useNavBar = reactive([
 ])
 
 export const navBarAdd = (item) => {
-    if (!useNavBar.find(i => i.name === item.name)) {
+    const index = useNavBar.findIndex(i => i.name === item.name);
+    if (index !== -1) navBarCheck(item);
+    if (index === -1) {
         useNavBar.forEach(i => i.isCheck = false);
         useNavBar.push({ text: item.text, name: item.name, isCheck: true });
     }
