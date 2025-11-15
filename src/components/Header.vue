@@ -1,8 +1,10 @@
 <script setup>
-import { ref } from 'vue';
-import { RouterLink } from 'vue-router';
+import { computed } from 'vue';
+import { useUser } from '../stone/user';
 
-const isLogin = ref(false);
+const isLogin = computed(() => {
+    return useUser.isLogining;
+})
 </script>
 <template>
     <header>
@@ -18,8 +20,8 @@ const isLogin = ref(false);
                 <RouterLink to="/login">去登录</RouterLink>
             </div>
             <div v-else class="user">
-                <span>{{ 'username' }}</span>
-                <RouterLink to="/logout">退出</RouterLink>
+                <span>{{ useUser.userName }}</span>
+                <RouterLink to="/login">退出</RouterLink>
             </div>
         </div>
     </header>
