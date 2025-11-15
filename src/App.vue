@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import Header from './components/header.vue';
 import Aside from './components/aside.vue';
+import NavBar from './components/navBar.vue'
 
 </script>
 
@@ -9,7 +10,10 @@ import Aside from './components/aside.vue';
   <Header></Header>
   <main>
     <Aside></Aside>
-    <RouterView></RouterView>
+    <div style="flex: 1;">
+      <NavBar />
+      <RouterView></RouterView>
+    </div>
   </main>
 </template>
 

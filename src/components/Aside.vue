@@ -2,8 +2,20 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { q } from '../api/api';
+import { useRouter } from 'vue-router';
+import { useNavBar } from '../stone/navBar';
 
 const leftNav = ref([])
+
+const router = useRouter();
+
+function toPage(item) {
+    router.push(item.name);
+    if (!useNavBar.find(i => i.path === item.name)) {
+        useNavBar.forEach(i => i.isCheck = false);
+        useNavBar.push({ text: item.text, path: item.name, isCheck: true });
+    }
+}
 
 q.get("/nav/left_nav").then(r => {
     /** @type{Array} **/
@@ -21,7 +33,12 @@ q.get("/nav/left_nav").then(r => {
                 <img :class="{ 'up': i.show }" src="/down.png" alt="">
             </div>
             <div v-if="i.show">
-                <div class="menuItem" v-for="(j, index) in i.children" :key="index">{{ j.text }}</div>
+                <div 
+                class="menuItem" 
+                v-for="(j, index) in i.children" 
+                :key="index" 
+                @click="toPage(j)"
+                >{{ j.text }}</div>
             </div>
         </div>
     </aside>
