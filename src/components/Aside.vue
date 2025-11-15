@@ -2,7 +2,8 @@
 import { ref } from 'vue';
 import { q } from '../api/api';
 import { useRouter } from 'vue-router';
-import { useNavBar, navBarAdd } from '../stone/navBar';
+import { navBarAdd } from '../stone/navBar';
+import { useUser } from '../stone/user';
 
 const leftNav = ref([])
 
@@ -23,6 +24,7 @@ q.get("/nav/left_nav").then(r => {
 <template>
     <aside>
         <div class="title">教学管理系统</div>
+        <div v-if="useUser.isLogining">
         <div class="menu" v-for="(i, index) in leftNav" :key="index">
             <div class="menuTitle" @click="i.show = !i.show">
                 {{ i.text }}
@@ -36,6 +38,7 @@ q.get("/nav/left_nav").then(r => {
                 @click="toPage(j)"
                 >{{ j.text }}</div>
             </div>
+        </div>
         </div>
     </aside>
 </template>

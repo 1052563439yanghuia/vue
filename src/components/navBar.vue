@@ -17,10 +17,10 @@ function deletePath(item, index) {
 <template>
     <div class="navbar">
         <img class="left" src="/download.png" alt="">
-        <div class="bar1">
+        <div class="barContent">
             <div 
                 class="item"
-                v-for="(item, index) in useNavBar" 
+                v-for="(item, index) in useNavBar"
                 :key="item.name" 
                 :class="{ checked: item.isCheck }"
             >
@@ -51,7 +51,7 @@ function deletePath(item, index) {
     border-bottom: 1px solid #3b82f6;
 }
 
-.navbar .bar1 {
+.navbar .barContent {
     flex: 1;
     height: 104%;
     display: flex;

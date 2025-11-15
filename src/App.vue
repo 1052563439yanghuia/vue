@@ -12,7 +12,9 @@ import NavBar from './components/navBar.vue'
     <Aside></Aside>
     <div style="flex: 1;">
       <NavBar />
-      <RouterView></RouterView>
+      <div style="height: calc(100% - 28px);">
+        <RouterView></RouterView>
+      </div>
     </div>
   </main>
 </template>
