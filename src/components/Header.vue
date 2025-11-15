@@ -65,5 +65,4 @@ import { RouterLink } from 'vue-router';
         text-align: center;
         text-decoration: none;
     }
-
 </style>

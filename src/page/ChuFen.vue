@@ -6,9 +6,6 @@ const ChuFen =ref([])
 axios.get('http://114.55.2.211:9010/student/info_chufen_search').then(res =>{
     const chufen = res.data.data.rows
     ChuFen.value = chufen
-    console.log(res.data.data);
-    
-
 })
 </script>
 <template>
@@ -39,9 +36,9 @@ axios.get('http://114.55.2.211:9010/student/info_chufen_search').then(res =>{
             </table>
         </div>
         <div class="fenye">
-            <div class="zuo">&lt;</div>
-            <div class="zuo">1</div>
-            <div class="zuo">&gt;</div>
+            <div class="zuo1">&lt;</div>
+            <div class="zuo1">1</div>
+            <div class="zuo1">&gt;</div>
         </div>
     </div>
 
@@ -85,7 +82,7 @@ axios.get('http://114.55.2.211:9010/student/info_chufen_search').then(res =>{
         margin-right: 50px;
         margin-top: 20px;
     }
-    .zuo{
+    .zuo1{
         width: 24px;
         height: 24px;
         border: 1px solid gray;
