@@ -16,7 +16,10 @@ q.get("/nav/left_nav").then(r => {
     <aside>
         <div class="title">教学管理系统</div>
         <div class="menu" v-for="(i, index) in leftNav" :key="index">
-            <div class="menuTitle" @click="i.show = !i.show">{{ i.text }}</div>
+            <div class="menuTitle" @click="i.show = !i.show">
+                {{ i.text }}
+                <img :class="{ 'up': i.show }" src="/down.png" alt="">
+            </div>
             <div v-if="i.show">
                 <div class="menuItem" v-for="(j, index) in i.children" :key="index">{{ j.text }}</div>
             </div>
@@ -24,12 +27,13 @@ q.get("/nav/left_nav").then(r => {
     </aside>
 </template>
 <style scoped>
-aside{
+aside {
     width: 213px;
     padding: 5px;
     background-color: #eff7fd;
     box-sizing: border-box;
 }
+
 .title {
     width: 160px;
     height: 40px;
@@ -44,7 +48,7 @@ aside{
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    transition: all 0.3s ease   ;
+    transition: all 0.3s ease;
 }
 
 .title:hover {
@@ -58,7 +62,19 @@ aside{
 .menu .menuTitle {
     padding: 12px;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.menu .menuTitle img {
+    transition: all 0.3s ease;
+}
+
+.menu .menuTitle img.up {
+    transform: rotate(180deg);
+}
+
 .menu .menuTitle:hover {
     color: #f87171;
     cursor: pointer;
