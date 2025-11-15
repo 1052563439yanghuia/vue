@@ -53,10 +53,10 @@ axios.get('http://114.55.2.211:9010/student/info_search_type').then(res=>{
             </div>
         </div>
         <div class="fenye">
-            <div class="zuo">&lt;</div>
-            <div class="zuo">1</div>
-            <div class="zuo">2</div>
-            <div class="zuo">&gt;</div>
+            <div class="zuo1">&lt;</div>
+            <div class="zuo1">1</div>
+            <div class="zuo1">2</div>
+            <div class="zuo1">&gt;</div>
         </div>
     </div>
 
@@ -104,7 +104,7 @@ axios.get('http://114.55.2.211:9010/student/info_search_type').then(res=>{
     table{
         width: 100%;
     }
-    .zuo{
+    .zuo1{
         width: 24px;
         height: 24px;
         background-color: white;
