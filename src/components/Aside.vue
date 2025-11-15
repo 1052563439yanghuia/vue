@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';
 import { q } from '../api/api';
 import { useRouter } from 'vue-router';
-import { useNavBar } from '../stone/navBar';
+import { useNavBar, navBarAdd } from '../stone/navBar';
 
 const leftNav = ref([])
 
@@ -11,10 +10,7 @@ const router = useRouter();
 
 function toPage(item) {
     router.push(item.name);
-    if (!useNavBar.find(i => i.path === item.name)) {
-        useNavBar.forEach(i => i.isCheck = false);
-        useNavBar.push({ text: item.text, path: item.name, isCheck: true });
-    }
+    navBarAdd({ text: item.text, name: item.name });
 }
 
 q.get("/nav/left_nav").then(r => {

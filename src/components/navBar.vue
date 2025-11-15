@@ -1,21 +1,17 @@
 <script setup>
-import { useNavBar } from '../stone/navBar';
+import { navBarCheck, navBarRemove, useNavBar } from '../stone/navBar';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 function toPath(item) {
-    useNavBar.forEach(i => i.isCheck = false);
-    item.isCheck = true;
-    router.push(item.path);
+    navBarCheck(item);
+    router.push(item.name);
 }
 
 function deletePath(item, index) {
-    useNavBar.splice(index, 1);
-    if (item.isCheck) {
-    useNavBar[index-1].isCheck = true;
-    router.push(useNavBar[index-1].path);
-    }
+    navBarRemove(item, index);
+    if (item.isCheck) router.push(useNavBar[index-1].name);
 }
 </script>
 <template>
@@ -25,7 +21,7 @@ function deletePath(item, index) {
             <div 
                 class="item"
                 v-for="(item, index) in useNavBar" 
-                :key="item.path" 
+                :key="item.name" 
                 :class="{ checked: item.isCheck }"
             >
                 <span
@@ -33,7 +29,7 @@ function deletePath(item, index) {
                 >{{ item.text }}</span>
                 <img 
                     @click="deletePath(item, index)" 
-                    v-if="item.path !== '/personCenter'" 
+                    v-if="item.name !== 'personCenter'" 
                     class="delete" 
                     src="/download.png" 
                     alt=""

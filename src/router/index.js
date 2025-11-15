@@ -8,10 +8,10 @@ import notFound from "../page/notFound.vue";
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", component: Login },
-    { path: "/login", component: Login },
-    { path: "/personCenter", component: personCenter },
-    { path: "/:pathMatch(.*)*", component: notFound },
+    { path: "/", name: "home", component: personCenter },
+    { path: "/login", name: "login", component: Login },
+    { path: "/personCenter", name: "personCenter", component: personCenter },
+    { path: "/:pathMatch(.*)*", name: "notFound", component: notFound },
   ]
 });
 
