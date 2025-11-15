@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { router } from '../router';
 
 const leftNav = ref([])
 // const leftNav = ref([
@@ -97,6 +98,10 @@ const leftNav = ref([])
 
 // leftNav.value.forEach(i => { i.show = false })
 
+function unTO(pageName){
+    router.push('./'+pageName)
+}
+
 axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
     /** @type{Array} **/
     const nav = r.data.data.left_nav_info
@@ -114,7 +119,7 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
             <img src="./images/xia.svg" alt="" class="tubiao" :class="{'arrowTransform':i.show}">
             </div>
         <div v-show="i.show">
-            <div v-for="(j, index) in i.children" :key="index" class="zicaidan">{{ j.text }}</div>
+            <div v-for="(j, index) in i.children" :key="index" class="zicaidan" @click="unTO(i.name)">{{ j.text }}</div>
         </div>
     </div>
 </template>

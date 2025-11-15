@@ -14,7 +14,7 @@ import { RouterLink } from 'vue-router';
                 <span class="wenzi4">（0）</span>
             </div>
             <div><span class="wenzi3">游客</span></div>
-            <RouterLink to="./login" class="denglu">去登录</RouterLink>
+            <RouterLink to="./" class="denglu">去登录</RouterLink>
         </div>
     </div>
 
