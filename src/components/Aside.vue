@@ -119,7 +119,7 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
             <img src="./images/xia.svg" alt="" class="tubiao" :class="{'arrowTransform':i.show}">
             </div>
         <div v-show="i.show">
-            <div v-for="(j, index) in i.children" :key="index" class="zicaidan" @click="unTO(i.name)">{{ j.text }}</div>
+            <div v-for="(j, index) in i.children" :key="index" class="zicaidan" @click="unTO(j.name)">{{ j.text }}</div>
         </div>
     </div>
 </template>
