@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue';
 import { q } from '../api/api';
 
@@ -7,11 +7,10 @@ const searchForm = ref({
     keyword: '',
     page: 1,
     pageSize: 10,
-    type: 'all',
-    isExact: false
 });
 // 学生列表数据
 const studentList = ref([]);
+const a = ref()
 // 总页数
 const totalPages = ref(1);
 
@@ -21,15 +20,13 @@ function getStudentInfo() {
     const paramsStr = 
         'keyword=' + searchForm.value.keyword +
         '&page=' + searchForm.value.page +
-        '&pageSize=' + searchForm.value.pageSize +
-        '&type=' + searchForm.value.type +
-        '&isExact=' + searchForm.value.isExact;
-
-    q.get(`student/info_search_type?${paramsStr}`).then(res => {
+        '&pageSize=' + searchForm.value.pageSize;
+    q.get(`/student/info_chufen_search?${paramsStr}`).then(res => {
         const { data } = res;
-        studentList.value = data.data;
-        // 取整
-        totalPages.value = Math.ceil(data.totalCount / searchForm.value.pageSize);
+        a.value = data.data.row
+        studentList.value = data.data.row;
+        // // 取整
+        // totalPages.value = Math.ceil(data.totalCount / searchForm.value.pageSize);
     });
 }
 
@@ -47,7 +44,7 @@ function prevPage() {
     }
 }
 
-function goToPage(page: number) {
+function goToPage(page) {
     if (page >= 1 && page <= totalPages.value) {
         searchForm.value.page = page;
         getStudentInfo();
@@ -62,23 +59,13 @@ getStudentInfo()
         <!-- 学生信息搜索 -->
         <div class="search">
             <form @submit.prevent="getStudentInfo">
-                <input v-model="searchForm.keyword" type="text">
-                <select v-model="searchForm.type">
-                    <option value="all">全部</option>
-                    <option value="id">学号</option>
-                    <option value="name">姓名</option>
-                    <option value="grade">班级</option>
-                </select>
-                <label>
-                    精确
-                    <input type="checkbox" v-model="searchForm.isExact">
-                </label>
+                <input v-model="searchForm.keyword" type="text" placeholder="支持学号、姓名和班级查询" />
                 <button>搜索</button>
             </form>
         </div>
         <!-- 表格 -->
         <table>
-            <caption>学生信息查询</caption>
+            <caption>受处分学生信息</caption>
             <thead>
                 <tr>
                     <th>学号</th>
