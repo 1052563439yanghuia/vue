@@ -1,17 +1,35 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 const ChuFen = ref([])
+const CHUFEN = ref('')
 
 axios.get('http://114.55.2.211:9010/student/info_chufen_search').then(res => {
     const chufen = res.data.data.rows
     ChuFen.value = chufen
 })
+const filteredList = computed(() =>{
+    const key = CHUFEN.value.trim().toLowerCase()
+    if(!key) return ChuFen.value
+
+    return ChuFen.value.filter(item =>{
+        const idStr = item.id ? item.id.toString().toLowerCase():""
+        const nameStr = item.name ? item.name.toLowerCase():""
+        const gradeStr = item.grade ? item.grade.toLowerCase():""
+
+        return(
+            idStr.includes(key) ||
+            nameStr.includes(key) ||
+            gradeStr.includes(key) 
+        )
+    })
+})
+
 </script>
 <template>
     <div class="quanbu">
         <div class="sousuo">
-            <input type="text" placeholder="支持学号、姓名和班级查询">
+            <input type="text" placeholder="支持学号、姓名和班级查询" v-model="CHUFEN">
             <button class="chaxun">查询</button>
         </div>
         <div class="chufen">
@@ -32,7 +50,7 @@ axios.get('http://114.55.2.211:9010/student/info_chufen_search').then(res => {
                 <tbody>
 
 
-                    <tr v-for="i in ChuFen" :key="i.id">
+                    <tr v-for="i in filteredList" :key="i.id">
                         <td>{{ i.id }}</td>
                         <td>{{ i.name }}</td>
                         <td>{{ i.age }}</td>

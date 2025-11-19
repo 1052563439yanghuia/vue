@@ -1,30 +1,50 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const Inof = ref([])
+const InforMation = ref('') //搜索关键字 
 
-axios.get('http://114.55.2.211:9010/student/info_search_type').then(res => {
+axios.get('http://localhost:3000/student/info_search_type').then(res => {
     const info = res.data.data
 
     Inof.value = info
+})
+const seachFrom = 
+// 计算属性：根据输入框自动过滤
+const filteredList = computed(() =>{
+    const key = InforMation.value.trim().toLowerCase()
+    if(!key) return Inof.value
+
+    return Inof.value.filter(item =>{
+        
+            const idStr = item.id ? item.id.toString():""
+            const nameStr = item.name ? item.name.toLowerCase():''
+            const gradeStr = item.grade ? item.grade.toLowerCase(): ''
+        
+            return (
+                idStr.includes(key) ||
+                nameStr.includes(key) ||
+                gradeStr.includes(key)
+            )
+    })
 })
 </script>
 <template>
     <div class="quanbu">
         <div class="shousuo">
-            <div><input type="text" placeholder="支持学号、姓名和班级查询" class="shuru"></div>
+            <div><input type="text" placeholder="支持学号、姓名和班级查询" class="shuru" v-model="InforMation"></div>
             <select class="duoxuan">
-                <option value="">全部</option>
-                <option value="">学号</option>
-                <option value="">姓名</option>
-                <option value="">年级</option>
+                <option value="all" >全部</option>
+                <option value="id" >学号</option>
+                <option value="name" >姓名</option>
+                <option value="grade" >年级</option>
             </select>
             <div>
                 <span>精确</span>
                 <input type="checkbox" class="checkbox">
             </div>
-            <button class="chaxun">查询</button>
+            <button class="chaxun" @click="selectQure">查询</button>
         </div>
         <div class="xueshengxinxi">
             <h2>学生信息</h2>
@@ -42,14 +62,14 @@ axios.get('http://114.55.2.211:9010/student/info_search_type').then(res => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="i in Inof" :key="i.id">
+                        <tr v-for="i in filteredList" :key="i.id">
                             <td>{{ i.id }}</td>
                             <td>{{ i.name }}</td>
                             <td>{{ i.age }}</td>
                             <td>{{ i.gender }}</td>
                             <td>{{ i.grade }}</td>
                             <td>{{ i.punishment }}</td>
-                            <td>{{ i.punishment_reason || '空' }}</td>
+                            <td>{{ i.punishment_reason || '无' }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,104 +2,14 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { router } from '../router';
+import { navBarAdd } from '../stone/narBar';
 
 const leftNav = ref([])
-// const leftNav = ref([
-//     {
-//         "text": "学生管理",
-//         "children": [
-//             {
-//                 "text": "学生信息查询",
-//                 "name": "student_info_search",
-//                 "need": true
-//             },
-//             {
-//                 "text": "管理受处分学生",
-//                 "name": "student_info_chufen",
-//                 "need": true
-//             },
-//             {
-//                 "text": "学生信息修改",
-//                 "name": "student_info_update",
-//                 "need": true
-//             }
-//         ],
-//         "need": true
-//     },
-//     {
-//         "text": "成绩管理",
-//         "children": [
-//             {
-//                 "text": "成绩录入",
-//                 "name": "score_entry"
-//             },
-//             {
-//                 "text": "成绩分布分析",
-//                 "name": "score_distribution"
-//             },
-//             {
-//                 "text": "补考名单生成",
-//                 "name": "makeup_list_generate"
-//             }
-//         ]
-//     },
-//     {
-//         "text": "教师管理",
-//         "children": [
-//             {
-//                 "text": "教师信息查询",
-//                 "name": "teacher_info_search"
-//             },
-//             {
-//                 "text": "添加新教师",
-//                 "name": "teacher_info_search"
-//             },
-//             {
-//                 "text": "教师课时统计",
-//                 "name": "teacher_hours_statistics"
-//             }
-//         ]
-//     },
-//     {
-//         "text": "事务管理",
-//         "children": [
-//             {
-//                 "text": "查看本周事务安排",
-//                 "name": "affair_info_search"
-//             },
-//             {
-//                 "text": "申请调整事务",
-//                 "name": "affair_info_apply"
-//             },
-//             {
-//                 "text": "查看申请进度",
-//                 "name": "affair_process_search"
-//             }
-//         ]
-//     },
-//     {
-//         "text": "实验室管理",
-//         "children": [
-//             {
-//                 "text": "实验室预约",
-//                 "name": "lab_reservation"
-//             },
-//             {
-//                 "text": "设备借用记录",
-//                 "name": "equipment_borrow_log"
-//             },
-//             {
-//                 "text": "安全巡检登记",
-//                 "name": "safety_inspection"
-//             }
-//         ]
-//     }
-// ])
 
-// leftNav.value.forEach(i => { i.show = false })
 
-function unTO(pageName){
-    router.push('./'+pageName)
+function unTO(item){
+    router.push(item.name)
+    navBarAdd({ text:item.text, name:item.name })
 }
 
 axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
@@ -119,7 +29,7 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
             <img src="./images/xia.svg" alt="" class="tubiao" :class="{'arrowTransform':i.show}">
             </div>
         <div v-show="i.show">
-            <div v-for="(j, index) in i.children" :key="index" class="zicaidan" @click="unTO(j.name)">{{ j.text }}</div>
+            <div v-for="(j, index) in i.children" :key="index" class="zicaidan" @click="unTO(j)">{{ j.text }}</div>
         </div>
     </div>
 </template>
@@ -171,8 +81,5 @@ axios.get("http://114.55.2.211:9010/nav/left_nav").then(r => {
     transition: 0.2s;
     transform: rotateZ(180deg);
 
-}
-.arrowTransformReturn{
-    transform: rotateZ(0deg);
 }
 </style>

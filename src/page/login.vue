@@ -1,22 +1,46 @@
 <script setup>
+import axios from 'axios';
 import { router } from '../router';
+import { reactive, ref } from 'vue';
+import { useUser } from '../stone/user';
 
+const user = reactive({
+    account:'admin',
+    password: 'admin'
+})
 
-    function goToPage(){
-        router.push('./personal')
-    }
+function goToPage(){
+    axios.post('http://localhost:3000/login',user).then(res =>{
+        if(res.status == 200){
+            alert(res.data.msg)
+
+            useUser.id = res.data.data.id
+            useUser.account = res.data.data.account
+            useUser.userName = res.data.data.userName
+            useUser.token = res.data.data.token
+
+            router.push('./personal')
+        }else{
+            alert('登录失败')
+        }
+    })    
+}
+
+    
+
 </script>
 <template>
     <div class="quanbu">
         <h3>请登录</h3>
+        
         <label for="account">
             <span>账号:</span>
-            <input type="text" placeholder="请输入你的账号" id="account">
+            <input v-model="user.account" type="text" placeholder="请输入你的账号" id="account">
         </label>
             
         <label for="password">
             <span>密码:</span>
-            <input type="password" placeholder="请输入你的密码" id="password">
+            <input v-model="user.password" type="password" placeholder="请输入你的密码" id="password">
         </label>
         <button @click="goToPage">登录</button>
     </div>

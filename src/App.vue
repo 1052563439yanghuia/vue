@@ -1,5 +1,4 @@
 <script setup>
-
 import Aside from './components/aside.vue';
 import Header from './components/header.vue';
 import NavigationBar from './components/NavigationBar.vue';

@@ -1,29 +1,24 @@
 <script setup>
 import { router } from '../router';
+import { useUser } from '../stone/user';
 
 
-function goto(){
+function logout() {
+    useUser.token = ''
     router.push('/')
 }
-
 </script>
-
-
-
 
 <template>
     <div class="quanbu">
-        <div class="xinxi">昵称：屈侯</div>
+        <div class="xinxi">昵称：{{ useUser.userName }}</div>
         <div class="xinxi">身份：教师</div>
-        <button @click="goto">退出登录</button>
+        <button @click="logout">退出登录</button>
     </div>
 </template>
 
-
-
-
 <style scoped>
-.quanbu{
+.quanbu {
     width: 100%;
     height: 100%;
     display: flex;
@@ -31,13 +26,15 @@ function goto(){
     justify-content: center;
     align-items: center;
 }
-button{
+
+button {
     width: 80px;
     height: 40px;
     border: 1px dashed gray;
     background-color: white;
 }
-.xinxi{
+
+.xinxi {
     width: 180px;
     height: 50px;
     font-size: 32px;
