@@ -10,7 +10,6 @@ axios.get('http://localhost:3000/student/info_search_type').then(res => {
 
     Inof.value = info
 })
-const seachFrom = 
 // 计算属性：根据输入框自动过滤
 const filteredList = computed(() =>{
     const key = InforMation.value.trim().toLowerCase()
